@@ -5,14 +5,18 @@
 <title> Twitter Graph </title>
 </head>
 
-<body>
-<h1>Twitter Graph</h1>
+<body style="background-color:#808080;">
+<center>
+<h1>Twitter Grap</h1>
 <p>this is the first project i made. it's a graph of the sum of the amount of tweets over time:</p>
 <p> <img src="twitter_graph.png" width="1500"> </p>
+<center>
 </body>
 
 <footer>
+<center>
 <p>made by Jelle Mulder</p>
+</center>
 </footer>
 
 </html>
