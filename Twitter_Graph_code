@@ -1,0 +1,49 @@
+from matplotlib import pyplot as plt
+import csv
+from matplotlib import style
+style.use('other')
+#print(plt.__file__)
+
+file = open('rawdata', 'r')
+rdata = file.read()
+cdata = rdata.split('\n')
+
+file.close()
+
+file = open('twitterdata', 'w')
+
+for i in range(len(cdata)):
+    cdata[i] = int(cdata[i])
+
+for i in range(len(cdata)):
+    n = 0
+    for j in range(i+1):
+        n += cdata[i-j]
+    file.write(str(i) + ',' + str(n) + '\n')
+
+file.close()
+
+fig = plt.figure(figsize=(7,7))
+ax = fig.add_subplot(111)
+ax.set_facecolor((26/255, 26/255, 26/255))
+ax.spines['bottom'].set_edgecolor((26/255, 26/255, 26/255))
+ax.spines['left'].set_edgecolor((26/255, 26/255, 26/255))
+ax.spines['top'].set_edgecolor((26/255, 26/255, 26/255))
+ax.spines['right'].set_edgecolor((26/255, 26/255, 26/255))
+
+x = []
+y = []
+
+with open('twitterdata', 'r') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    for row in plots:
+        x.append(int(row[0]))
+        y.append(int(row[1]))
+
+plt.plot(x, y, label='me not having a life')
+
+plt.xlabel('time since first tweet (days)')
+plt.ylabel('sum of tweets')
+plt.title('sum of tweets over time')
+plt.legend(loc=2)
+plt.show()
