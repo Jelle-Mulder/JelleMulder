@@ -2,20 +2,20 @@
 <html>
 
 <head>
-<title> Twitter Graph </title>
+<title> Main </title>
 </head>
 
 <body style="background-color:#808080;">
 <center>
-<h1>Twitter Graph</h1>
-<p>this is the first project i made. it's a graph of the sum of the amount of tweets over time:</p>
-<p> <img src="twitter_graph.png" width="1500"> </p>
+<h1>Welcome!</h1>
+<p>this is the main page. here you can find all links to my projects.</p>
+<p> <a href="flowreal.github.io/twitter_graph">Twitter Graph</a> </p>
 <center>
 </body>
 
 <footer>
 <center>
-<p>made by Jelle Mulder</p>
+<p>made by Jelle Mulder. contact: zecondchannel1@gmail.com</p>
 </center>
 </footer>
 
