@@ -6,16 +6,16 @@
 </head>
 
 <body style="background-color:#808080;">
+<h1 font=30px>Welcome!</h1>
 <center>
-<h1>Welcome!</h1>
 <p>this is the main page. here you can find all links to my projects.</p>
-<p> <a href="flowreal.github.io/twitter_graph">Twitter Graph</a> </p>
+<p> <a href="/twitter_graph">Twitter Graph</a> </p>
 <center>
 </body>
 
 <footer>
 <center>
-<p>made by Jelle Mulder. contact: zecondchannel1@gmail.com</p>
+<p><i>made by Jelle Mulder. contact: zecondchannel1@gmail.com</i></p>
 </center>
 </footer>
 
