@@ -1,0 +1,123 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib import style
+import numpy as np
+
+style.use('other')
+#  fig = plt.figure(figsize=(7, 7))
+fig = plt.figure(figsize=(16, 9), dpi=120)
+ax = fig.add_subplot()
+ax.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_aspect(1)
+ax.spines['bottom'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['left'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['top'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['right'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_xlim(-26, 26)
+ax.set_ylim(-5, 35)
+ax.axis('off')
+fig.patch.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+font_dict = {'family': 'STIXGeneral',
+             'color': 'darkred',
+             'fontstyle': 'italic',
+             'fontweight': 'bold',
+             'size': 12}
+
+p0 = -20
+v0 = 40  # m s^-1
+m0 = 20  # kg
+r0 = m0 / 10
+
+p1 = 20
+v1 = 20  # m s^-1
+m1 = 20  # kg
+r1 = m1 / 10
+
+p2 = 0
+v2 = 15  # m s^-1
+m2 = 20  # kg
+r2 = m2 / 10
+
+t = np.linspace(0, 2 * np.pi, 525)
+x0 = r0 * np.cos(t) + p0
+y0 = r0 * np.sin(t) + 1
+line0, = ax.plot(x0, y0)
+x1 = r1 * np.cos(t) + p1
+y1 = r1 * np.sin(t) + 1
+line1, = ax.plot(x1, y1)
+x2 = r2 * np.cos(t) + p2
+y2 = r2 * np.sin(t) + 1
+line2, = ax.plot(x2, y2)
+x3 = [-25, -25]
+y3 = [-50, 50]
+line3, = ax.plot(x3, y3)
+x4 = [25, 25]
+y4 = [-50, 50]
+line4, = ax.plot(x4, y4)
+momm0 = m0 * v0
+mom0 = ax.text(-24, 33, 'momentum of obj 0: ' + str(momm0) + 'kg m s^-1', fontdict=font_dict)
+momm1 = m1 * v1
+mom1 = ax.text(-24, 29, 'momentum of obj 1: ' + str(momm1) + 'kg m s^-1', fontdict=font_dict)
+momm2 = m2 * v2
+mom2 = ax.text(-24, 25, 'momentum of obj 2: ' + str(momm2) + 'kg m s^-1', fontdict=font_dict)
+post0 = ax.text(p0, 0, '0')
+post1 = ax.text(p1, 0, '1')
+post2 = ax.text(p2, 0, '2')
+
+dt = 1 / 120
+def animate(i):
+    global p0, p1, p2, v0, v1, v2, x0, y0, x1, y1, x2, y2, x3, x4, y3, y4
+    p0 = p0 + dt * v0
+    p1 = p1 + dt * v1
+    p2 = p2 + dt * v2
+
+    if abs(p1 - p2) < r1 + r2:
+        vf1 = v1 * (m1 - m2) / (m1 + m2) + v2 * (2 * m2) / (m1 + m2)
+        v2 = v2 * (m2 - m1) / (m1 + m2) + v1 * (2 * m2) / (m1 + m2)
+        v1 = vf1
+        if v2 > v1:
+            v2 = abs(v2 * (m2 - m1) / (m1 + m2) + v1 * (2 * m2) / (m1 + m2))
+
+    if abs(p0 - p2) < r0 + r2:
+        vf0 = v0 * (m0 - m2) / (m0 + m2) + v2 * (2 * m2) / (m0 + m2)
+        v2 = v2 * (m2 - m0) / (m0 + m2) + v0 * (2 * m2) / (m0 + m2)
+        v0 = vf0
+        if v2 > v0:
+            v2 = abs(v2 * (m2 - m0) / (m0 + m2) + v0 * (2 * m2) / (m0 + m2))
+
+    if r0 > abs(p0 + 25):
+        v0 = -v0
+    if r1 > abs(p1 - 25):
+        v1 = -v1
+
+    x0 = r0 * np.cos(t) + p0
+    y0 = r0 * np.sin(t) + 1
+    x1 = r1 * np.cos(t) + p1
+    y1 = r1 * np.sin(t) + 1
+    x2 = r2 * np.cos(t) + p2
+    y2 = r2 * np.sin(t) + 1
+    x3 = [-25, -25]
+    y3 = [-50, 50]
+    x4 = [25, 25]
+    y4 = [-50, 50]
+    line0.set_data(x0, y0)
+    line1.set_data(x1, y1)
+    line2.set_data(x2, y2)
+    line3.set_data(x3, y3)
+    line4.set_data(x4, y4)
+    momm0 = m0 * v0
+    mom0.set_text('momentum of obj 0: ' + str(momm0) + 'kg m s^-1')
+    momm1 = m1 * v1
+    mom1.set_text('momentum of obj 1: ' + str(momm1) + 'kg m s^-1')
+    momm2 = m2 * v2
+    mom2.set_text('momentum of obj 2: ' + str(momm2) + 'kg m s^-1')
+    post0.set_position((p0 - 1, 0))
+    post1.set_position((p1 - 1, 0))
+    post2.set_position((p2 - 1, 0))
+
+
+ani = animation.FuncAnimation(fig, animate, interval=dt * 1000, frames=np.arange(7 / dt))
+#  plt.show()
+f = r"E:\Github\floWREAL.github.io\animations\ball_collision1.mp4"
+writervideo = animation.FFMpegWriter(fps=60)
+ani.save(f, writer=writervideo, dpi=120, savefig_kwargs={'facecolor': (26 / 255, 26 / 255, 26 / 255)})
