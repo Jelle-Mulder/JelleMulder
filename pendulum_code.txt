@@ -1,0 +1,79 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib import style
+import numpy as np
+
+style.use('other')
+#fig = plt.figure(figsize=(7, 7))
+fig = plt.figure(figsize=(16, 9), dpi=120)
+ax = fig.add_subplot()
+ax.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_aspect(1)
+ax.spines['bottom'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['left'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['top'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['right'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_xlim(-13, 13)
+ax.set_ylim(-2, 33)
+ax.axis('off')
+fig.patch.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+font_dict = {'family': 'STIXGeneral',
+             'color': 'darkred',
+             'fontstyle': 'italic',
+             'fontweight': 'bold',
+             'size': 12}
+
+
+gravity = 4  # m/s^2
+theta = 49*np.pi/100  # angle
+string_r = 10  # string length
+
+object_m = 9  # mass
+object_h = string_r - (np.cos(theta)/string_r)  # height above ground
+object_v = 0  # velocity
+object_r = 1  # radius of object
+T = 6.3469756  # period (s)
+
+a = string_r * np.cos(theta)
+b = string_r * np.sin(theta) + 10.5
+x1 = [0, a]
+y1 = [10.5, b]
+line1, = ax.plot(x1, y1)  # string
+
+alpha = np.linspace(0, 2 * np.pi, 525)
+x2 = object_r * np.cos(alpha) + a
+y2 = object_r * np.sin(alpha) + b
+line2, = ax.plot(x2, y2)  # object
+
+PE = round(object_m * b * gravity)
+text1 = ax.text(-5, 29, 'PE = ' + str(PE) + 'J', fontdict=font_dict)
+
+
+A_p = 0  # acceleration
+
+dt = 1 / 120
+def animate(i):
+    global object_v, a, b, y1, x1, y2, x2, A_p, theta, PE, object_h
+    A_p = -1 * np.cos(theta) * gravity / string_r
+    object_v += dt * A_p
+    theta += object_v
+
+    a = string_r * np.cos(theta)
+    b = string_r * np.sin(theta) + 10.5
+    x1 = [0, a]
+    y1 = [10.5, b]
+    line1.set_data(x1, y1)
+    x2 = object_r * np.cos(alpha) + a
+    y2 = object_r * np.sin(alpha) + b
+    line2.set_data(x2, y2)
+
+    PE = round(object_m * b * gravity)
+    text1.set_text('PE = ' + str(PE) + 'J')
+
+
+
+ani = animation.FuncAnimation(fig, animate, interval=dt * 1000, frames=np.arange(3 / dt))
+#plt.show()
+f = r"E:\Github\floWREAL.github.io\animations\pendulum1.mp4"
+writervideo = animation.FFMpegWriter(fps=60)
+ani.save(f, writer=writervideo, dpi=120, savefig_kwargs={'facecolor': (26 / 255, 26 / 255, 26 / 255)})
