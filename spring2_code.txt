@@ -1,0 +1,88 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from matplotlib import style
+import numpy as np
+
+style.use('other')
+#fig = plt.figure(figsize=(7, 7))
+fig = plt.figure(figsize=(16, 9), dpi=120)
+ax = fig.add_subplot()
+ax.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_aspect(1)
+ax.spines['bottom'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['left'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['top'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.spines['right'].set_edgecolor((26 / 255, 26 / 255, 26 / 255))
+ax.set_xlim(-50, 50)
+ax.set_ylim(-6, 6)
+ax.axis('off')
+fig.patch.set_facecolor((26 / 255, 26 / 255, 26 / 255))
+font_dict = {'family': 'STIXGeneral',
+             'color': 'darkred',
+             'fontstyle': 'italic',
+             'fontweight': 'bold',
+             'size': 12}
+
+
+m = 1  # weight of object
+k = 10  # spring constant
+F = 0  # force
+x = -10  # position
+A = x  # max displacement
+r = 5  # radius of object
+a = -30  # origin of spring
+v = 0  # velocity of object
+
+w = np.sqrt(k / m)
+t = np.linspace(0, 1, 600)
+x1 = t + 1 * np.cos(w * t)
+y1 = 2 * np.sin(w * t)
+line1, = ax.plot(x1 * (x - a) + a, y1)  # spring
+
+alpha = np.linspace(0, 2 * np.pi, 525)
+x2 = r * np.cos(alpha) + x
+y2 = r * np.sin(alpha)
+line2, = ax.plot(x2, y2)  # object
+
+x3 = [a, a]
+y3 = [10, -10]
+line3, = ax.plot(x3, y3)  # wall that spring is attached to
+
+x4 = [a, 50]
+y4 = [0-r, 0-r]
+line4, = ax.plot(x4, y4)  # floor
+
+
+
+text1 = ax.text(x, 0, round(v), fontdict=font_dict)
+
+
+dt = 1 / 120
+def animate(i):
+    global x, F, v, t, x1, y1, x2, y2, x3, y3, x4, y4
+    F = -k * x
+    v += dt * F
+    x += v * dt
+
+    x3 = [a, a]
+    y3 = [10, 0-r]
+    line3.set_data(x3, y3)
+    x4 = [a, 50]
+    y4 = [0-r, 0-r]
+    line4.set_data(x4, y4)
+    x2 = r * np.cos(alpha) + x
+    y2 = r * np.sin(alpha)
+    line2.set_data(x2, y2)
+    t = np.linspace(0, 1, 600)
+    x1 = t + 0.05 * np.cos(40 * t)
+    y1 = 2 * np.sin(40 * t)
+    line1.set_data(x1 * (x - a) + a, y1)
+
+    text1.set_text(round(v))
+    text1.set_position((x, 0))
+
+ani = animation.FuncAnimation(fig, animate, interval=dt * 1000, frames=np.arange(10 / dt))
+#plt.show()
+f = r"E:\Github\floWREAL.github.io\animations\spring2.mp4"
+writervideo = animation.FFMpegWriter(fps=120)
+ani.save(f, writer=writervideo, dpi=120, savefig_kwargs={'facecolor': (26 / 255, 26 / 255, 26 / 255)})
