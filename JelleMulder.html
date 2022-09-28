@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="background-color:#808080;">
+<html>
    <script>
      function todayDate(){
         var d = new Date();
@@ -9,7 +9,7 @@
    </script>
 
 <head>
-<title style="color:white;"> JelleMulder </title>
+<title> Main </title>
 <link rel="icon" href="https://cdn.discordapp.com/attachments/282586809551028234/924674652641583104/fish.jpg">
 <style>
 body {
@@ -24,6 +24,8 @@ body {
 .navbar a {
   float: left;
   font-size: 16px;
+  color: black;
+  background-color: inherit;
   color: white;
   text-align: center;
   padding: 14px 16px;
@@ -39,21 +41,20 @@ body {
   font-size: 16px;  
   border: none;
   outline: none;
-  color: white;
   padding: 14px 16px;
   background-color: inherit;
+  color: white;
   font-family: inherit;
   margin: 0;
 }
 
 .navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
+  background-color: grey;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #f9f9f9;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -61,24 +62,22 @@ body {
 
 .dropdown-content a {
   float: none;
-  color: black;
   padding: 12px 16px;
   text-decoration: none;
+  background-color: inherit;
   display: block;
   text-align: left;
-}
-
-.dropdown-content a:hover {
-  background-color: #ddd;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-</style>
-</head>
 
-<body style="background-color:#808080;" onload=todayDate()>
+.dark-mode {
+  background-color: black;
+  color: white;
+}
+</style>
 <div class="navbar">
   <a href="#home">Home</a>
   <a href="#news">News</a>
@@ -86,18 +85,22 @@ body {
     <button class="dropbtn">Python Projects 
       <i class="fa fa-caret-down"></i>
     </button>
-    <div class="dropdown-content">
+    <div class="dropdown-content" style=blue>
       <a href="#/ball_collision">Ball Collision</a>
       <a href="#/pendulum">Pendulum</a>
       <a href="#/spring">Spring</a>
 	  <a href="#/twitter_graph">Twitter Graph</a>
     </div>
   </div>
-  <a align="right"><button onclick="myFunction()">Toggle dark mode</button></a>
+  <a align="right"><button onclick="myFunction()">Toggle Dark Mode</button></a>
 </div>
+</head>
+
+<body onload=todayDate()>
+
 
 <center>
-<h1 style="color:white;">Jelle Mulder</h1>
+<h1>Jelle Mulder</h1>
 
 <p>I am currently a student in the IB program in Tilst, Denmark.</p>
 </body>
@@ -105,9 +108,16 @@ body {
 
 <footer>
 <center>
-<p style="color:white;"><i>Contact Me: Zecondchannel1@gmail.com. +45 60 56 01 75.</i></p>
+<p><i>Contact Me: Zecondchannel1@gmail.com. +45 60 56 01 75.</i></p>
 	&copy; <em id="date"></em>Jelle Mulder
 </center>
 </footer>
+
+<script>
+function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
 
 </html>
