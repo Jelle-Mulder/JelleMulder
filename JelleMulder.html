@@ -11,18 +11,95 @@
 <head>
 <title style="color:white;"> JelleMulder </title>
 <link rel="icon" href="https://cdn.discordapp.com/attachments/282586809551028234/924674652641583104/fish.jpg">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
 </head>
 
 <body style="background-color:#808080;" onload=todayDate()>
+<div class="navbar">
+  <a href="#home">Home</a>
+  <a href="#news">News</a>
+  <div class="dropdown">
+    <button class="dropbtn">Python Projects 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#/ball_collision">Ball Collision</a>
+      <a href="#/pendulum">Pendulum</a>
+      <a href="#/spring">Spring</a>
+	  <a href="#/twitter_graph">Twitter Graph</a>
+    </div>
+  </div>
+  <a align="right"><button onclick="myFunction()">Toggle dark mode</button></a>
+</div>
+
 <center>
-<h1 style="color:white;">Welcome!</h1>
-<center>
-<p style="color:white;">this is the main page. here you can find all links to my projects (sorted in alphabetical order):</p>
-<p style="color:white;"> <a href="/ball_collision">Ball Collision</a> </p>
-<p style="color:white;"> <a href="/pendulum">Pendulum</a> </p>
-<p style="color:white;"> <a href="/spring">Spring</a> </p>
-<p style="color:white;"> <a href="/twitter_graph">Twitter Graph</a> </p>
-<center>
+<h1 style="color:white;">Jelle Mulder</h1>
+
+<p>I am currently a student in the IB program in Tilst, Denmark.</p>
 </body>
 
 
