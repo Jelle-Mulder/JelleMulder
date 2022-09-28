@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html style="background-color:#808080;">
+   <script>
+     function todayDate(){
+        var d = new Date();
+        var n = d.getFullYear() + "  ";
+        return document.getElementById("date").innerHTML = n;
+      }
+   </script>
 
 <head>
 <title style="color:white;"> Main </title>
 <link rel="icon" href="https://cdn.discordapp.com/attachments/282586809551028234/924674652641583104/fish.jpg">
 </head>
 
-<body style="background-color:#808080;">
+<body style="background-color:#808080;" onload=todayDate()>
 <center>
 <h1 style="color:white;">Welcome!</h1>
 <center>
@@ -17,7 +24,6 @@
 <p style="color:white;"> <a href="/twitter_graph">Twitter Graph</a> </p>
 <center>
 </body>
-
 <br>
 <br>
 <br>
